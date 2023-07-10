@@ -43,6 +43,28 @@
             </div>
           </div>
         </div>
+
+        <h4><b><i style="padding: 14px;text-align: center;">Visit History</i></b></h4>
+
+        <div class="row" *ngIf="this.visit">
+          <div class="col-3">
+            <h4><b>Date</b></h4>
+            {{this.visit.date | date}}
+          </div>
+          <div class="col-3">
+            <h4><b>Height</b></h4>
+            {{this.visit.height}}
+          </div>
+          <div class="col-3">
+            <h4><b>Weight</b></h4>
+           {{this.visit.weight}}
+          </div>
+          <div class="col-3">
+            <h4><b>BMI</b></h4>
+            {{this.visit.bmi}}
+          </div>
+        </div>
+
       </div>
     </section>
     

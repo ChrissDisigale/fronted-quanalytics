@@ -16,6 +16,8 @@ export class PatientServiceService extends UnsubscribeOnDestroyAdapter
  dialogData: any;
 
  private baseURL = "http://localhost:8080/api/v1/patients";
+ private baseURL2 = "http://localhost:8080/api/v1/visits";
+
 
 
 //  httpOptions = {
@@ -57,6 +59,22 @@ export class PatientServiceService extends UnsubscribeOnDestroyAdapter
    // error code here
   });
   return this.dataChange;
+}
+
+addVisit(visit: any): Observable<any> {
+  this.dialogData = visit;
+
+  this.httpClient.post<any>(`${this.baseURL2}`,visit).subscribe(data => {
+    this.dialogData = visit;
+    },
+    (err: HttpErrorResponse) => {
+   // error code here
+  });
+  return this.dataChange;
+}
+
+getPatientVisit(id:number) : Observable<any>{
+  return this.httpClient.get<any>(`${this.baseURL2}/${id}`);
 }
 
 getPatientDetail(id:number) : Observable<any>{
