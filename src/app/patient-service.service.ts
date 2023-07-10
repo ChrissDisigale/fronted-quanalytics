@@ -61,6 +61,18 @@ export class PatientServiceService extends UnsubscribeOnDestroyAdapter
   return this.dataChange;
 }
 
+updatePatient(patient: any, id:number): Observable<any> {
+  this.dialogData = patient;
+
+  this.httpClient.put<any>(`${this.baseURL}/${id}`,patient).subscribe(data => {
+    this.dialogData = patient;
+    },
+    (err: HttpErrorResponse) => {
+   // error code here
+  });
+  return this.dataChange;
+}
+
 addVisit(visit: any): Observable<any> {
   this.dialogData = visit;
 

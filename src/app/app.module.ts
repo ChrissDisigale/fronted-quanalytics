@@ -27,6 +27,7 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import { PatientProfileComponent } from './patient-profile/patient-profile.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { VisitDialogComponent } from './visit-dialog/visit-dialog.component';
+import { EditPatientComponent } from './edit-patient/edit-patient.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { VisitDialogComponent } from './visit-dialog/visit-dialog.component';
     FormDialogComponent,
     PatientProfileComponent,
     PatientListComponent,
-    VisitDialogComponent
+    VisitDialogComponent,
+    EditPatientComponent
   ],
   imports: [
     BrowserModule,

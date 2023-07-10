@@ -12,6 +12,7 @@ import { map } from "rxjs/operators";
 import { FormDialogComponent } from "../form-dialog/form-dialog.component"; 
 import { SelectionModel } from "@angular/cdk/collections";
 import { UnsubscribeOnDestroyAdapter } from "src/app/shared/UnsubscribeOnDestroyAdapter";
+import { EditPatientComponent } from "../edit-patient/edit-patient.component";
 
 @Component({
   selector: 'app-patient-list',
@@ -83,39 +84,33 @@ export class PatientListComponent
   }
 
   editCall(row:any) {
-    // this.id = row.id;
-    // let tempDirection;
-    // if (localStorage.getItem("isRtl") === "true") {
-    //   tempDirection = "rtl";
-    // } else {
-    //   tempDirection = "ltr";
-    // }
-    // const dialogRef = this.dialog.open(FormDialogComponent, {
-    //   data: {
-    //     farmers: row,
-    //     action: "edit",
-    //   },
-    //   direction: tempDirection,
-    // });
-    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === 1) {
-    //     // When using an edit things are little different, firstly we find record inside DataService by id
-    //     const foundIndex = this.exampleDatabase.dataChange.value.findIndex(
-    //       (x) => x.id === this.id
-    //     );
-    //     // Then you update that record using data from dialogData (values you enetered)
-    //     this.exampleDatabase.dataChange.value[foundIndex] =
-    //       this.farmersService.getDialogData();
-    //     // And lastly refresh table
-    //     this.refreshTable();
-    //     this.showNotification(
-    //       "black",
-    //       "Edit Record Successfully...!!!",
-    //       "bottom",
-    //       "center"
-    //     );
-    //   }
-    // });
+    this.id = row.id;
+
+    const dialogRef = this.dialog.open(EditPatientComponent, {
+      data: {
+        patients: row,
+        action: "edit",
+      }
+      });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        // When using an edit things are little different, firstly we find record inside DataService by id
+        const foundIndex = this.exampleDatabase!.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
+        // Then you update that record using data from dialogData (values you enetered)
+        this.exampleDatabase!.dataChange.value[foundIndex] =
+          this.patientsService.getDialogData();
+        // And lastly refresh table
+        this.refreshTable();
+        // this.showNotification(
+        //   "black",
+        //   "Edit Record Successfully...!!!",
+        //   "bottom",
+        //   "center"
+        // );
+      }
+    });
   }
 
   private refreshTable() {
